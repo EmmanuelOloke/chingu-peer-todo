@@ -51,15 +51,15 @@ function App() {
           todoItems.map((eachTodoItem, index) => (
             <HStack w="full" justifyContent="space-between" key={eachTodoItem.id}>
               {!eachTodoItem.isDone ? (
-                <CheckIcon onClick={() => checked(index)} />
+                <CheckIcon cursor="pointer" onClick={() => checked(index)} />
               ) : (
-                <MinusIcon onClick={() => checked(index)} />
+                <MinusIcon cursor="pointer" onClick={() => checked(index)} />
               )}
 
               <Text style={{ textDecoration: eachTodoItem.isDone ? 'line-through' : '' }}>
                 {eachTodoItem.body}
               </Text>
-              <DeleteIcon onClick={() => deleted(eachTodoItem.id)} />
+              <DeleteIcon cursor="pointer" onClick={() => deleted(eachTodoItem.id)} />
             </HStack>
           ))
         )}
