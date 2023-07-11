@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { Button, Flex, HStack, Heading, Input, Text, VStack } from '@chakra-ui/react';
+import { Button, HStack, Heading, Input, StackDivider, Text, VStack } from '@chakra-ui/react';
+import { DeleteIcon, CheckIcon } from '@chakra-ui/icons';
+
+import { nanoid } from 'nanoid';
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -8,9 +11,14 @@ function App() {
     () => JSON.parse(localStorage.getItem('todoItems')) || []
   );
 
+  const todo = {
+    id: nanoid(),
+    body: inputText,
+    isDone: false,
+  };
+
   const addTodo = () => {
-    const updatedArray = [...todoItems, inputText];
-    setTodoItems(updatedArray);
+    setTodoItems([...todoItems, todo]);
     setInputText('');
   };
 
@@ -18,22 +26,39 @@ function App() {
     setInputText(e.target.value);
   };
 
+  const checked = (index) => {
+    const newTodos = [...todoItems];
+    newTodos[index].isDone = true;
+    setTodoItems(newTodos);
+  };
+
+  const deleted = (id) => {
+    const newTodoItems = todoItems.filter((todo) => todo.id !== id);
+    setTodoItems(newTodoItems);
+  };
+
   useEffect(() => {
     localStorage.setItem('todoItems', JSON.stringify(todoItems));
   }, [todoItems]);
 
   return (
-    <Flex h="100vh" justifyContent="center" alignItems="center">
-      <VStack border="1px solid gray" borderRadius="8px" p={5}>
-        <Heading>Todo App</Heading>
-
+    <VStack h="100vh" justifyContent="center" alignItems="center">
+      <Heading>Todo App</Heading>
+      <VStack divider={<StackDivider />} border="1px solid gray" borderRadius="8px" p={5}>
         {todoItems.length === 0 ? (
-          <Text>No items added to the todo yet</Text>
+          <ext>No items added to the todo yet</ext>
         ) : (
-          todoItems.map((eachTodoItem) => (
-            <Text borderBottom="2px solid blue" key={eachTodoItem}>
-              {eachTodoItem}
-            </Text>
+          todoItems.map((eachTodoItem, index) => (
+            <HStack w="full" justifyContent="space-between" key={eachTodoItem.id}>
+              <CheckIcon />
+              <Text
+                style={{ textDecoration: eachTodoItem.isDone ? 'line-through' : '' }}
+                onClick={() => checked(index)}
+              >
+                {eachTodoItem.body}
+              </Text>
+              <DeleteIcon onClick={() => deleted(eachTodoItem.id)} />
+            </HStack>
           ))
         )}
 
@@ -55,7 +80,7 @@ function App() {
           </Button>
         </HStack>
       </VStack>
-    </Flex>
+    </VStack>
   );
 }
 
