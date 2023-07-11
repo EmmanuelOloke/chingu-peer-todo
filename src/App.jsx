@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Button, HStack, Heading, Input, StackDivider, Text, VStack } from '@chakra-ui/react';
-import { DeleteIcon, CheckIcon } from '@chakra-ui/icons';
+import { DeleteIcon, CheckIcon, MinusIcon } from '@chakra-ui/icons';
 
 import { nanoid } from 'nanoid';
 
@@ -28,7 +28,7 @@ function App() {
 
   const checked = (index) => {
     const newTodos = [...todoItems];
-    newTodos[index].isDone = true;
+    newTodos[index].isDone = !newTodos[index].isDone;
     setTodoItems(newTodos);
   };
 
@@ -50,11 +50,13 @@ function App() {
         ) : (
           todoItems.map((eachTodoItem, index) => (
             <HStack w="full" justifyContent="space-between" key={eachTodoItem.id}>
-              <CheckIcon />
-              <Text
-                style={{ textDecoration: eachTodoItem.isDone ? 'line-through' : '' }}
-                onClick={() => checked(index)}
-              >
+              {!eachTodoItem.isDone ? (
+                <CheckIcon onClick={() => checked(index)} />
+              ) : (
+                <MinusIcon onClick={() => checked(index)} />
+              )}
+
+              <Text style={{ textDecoration: eachTodoItem.isDone ? 'line-through' : '' }}>
                 {eachTodoItem.body}
               </Text>
               <DeleteIcon onClick={() => deleted(eachTodoItem.id)} />
