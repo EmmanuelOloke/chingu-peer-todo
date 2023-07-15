@@ -46,7 +46,7 @@ function App() {
       <Heading>Todo App</Heading>
       <VStack divider={<StackDivider />} border="1px solid gray" borderRadius="8px" p={5}>
         {todoItems.length === 0 ? (
-          <ext>No items added to the todo yet</ext>
+          <Text>No items added to the todo yet</Text>
         ) : (
           todoItems.map((eachTodoItem, index) => (
             <HStack w="full" justifyContent="space-between" key={eachTodoItem.id}>
