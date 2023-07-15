@@ -4,7 +4,8 @@
   "description": "Backend for the todo app built for Chingu Pair Programming by Emmanuel and Braine",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/EmmanuelOloke/chingu-peer-todo/issues"
   },
-  "homepage": "https://github.com/EmmanuelOloke/chingu-peer-todo#readme"
+  "homepage": "https://github.com/EmmanuelOloke/chingu-peer-todo#readme",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "prisma": "^5.0.0"
+  }
 }
