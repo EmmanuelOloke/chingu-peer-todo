@@ -1,14 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import { Button, HStack, Heading, Input, StackDivider, Text, VStack } from '@chakra-ui/react';
-import { DeleteIcon, CheckIcon, MinusIcon } from '@chakra-ui/icons';
+import {
+  Button,
+  HStack,
+  Heading,
+  Input,
+  StackDivider,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { DeleteIcon, CheckIcon, MinusIcon } from "@chakra-ui/icons";
 
-import { nanoid } from 'nanoid';
+import { nanoid } from "nanoid";
 
 function App() {
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
   const [todoItems, setTodoItems] = useState(
-    () => JSON.parse(localStorage.getItem('todoItems')) || []
+    () => JSON.parse(localStorage.getItem("todoItems")) || []
   );
 
   const todo = {
@@ -20,7 +28,7 @@ function App() {
 
   const addTodo = () => {
     setTodoItems([...todoItems, todo]);
-    setInputText('');
+    setInputText("");
   };
 
   const updateInput = (e) => {
@@ -40,12 +48,12 @@ function App() {
 
   const addTodoButtonRef = useRef();
   const enterKeyPressed = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       addTodoButtonRef.current.click();
     }
   };
   useEffect(() => {
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
+    localStorage.setItem("todoItems", JSON.stringify(todoItems));
   }, [todoItems]);
 
   return (
@@ -56,18 +64,22 @@ function App() {
         border="1px solid gray"
         borderRadius="8px"
         p={5}
-        w={{ base: '90%', lg: '40%' }}
+        w={{ base: "90%", lg: "40%" }}
       >
         {todoItems.length === 0 ? (
           <Text>No items added to the todo yet</Text>
         ) : (
           todoItems.map((eachTodoItem, index) => (
-            <HStack w="full" justifyContent="space-between" key={eachTodoItem.id}>
+            <HStack
+              w="full"
+              justifyContent="space-between"
+              key={eachTodoItem.id}
+            >
               {!eachTodoItem.isDone ? (
                 <CheckIcon
                   cursor="pointer"
                   onClick={() => checked(index)}
-                  _hover={{ color: 'green' }}
+                  _hover={{ color: "green" }}
                 />
               ) : (
                 <MinusIcon cursor="pointer" onClick={() => checked(index)} />
@@ -75,7 +87,9 @@ function App() {
 
               <Text
                 maxWidth="17rem"
-                style={{ textDecoration: eachTodoItem.isDone ? 'line-through' : '' }}
+                style={{
+                  textDecoration: eachTodoItem.isDone ? "line-through" : "",
+                }}
               >
                 {eachTodoItem.body}
               </Text>
@@ -84,7 +98,7 @@ function App() {
               <DeleteIcon
                 cursor="pointer"
                 onClick={() => deleted(eachTodoItem.id)}
-                _hover={{ color: 'red' }}
+                _hover={{ color: "red" }}
               />
             </HStack>
           ))
@@ -103,7 +117,7 @@ function App() {
             size="lg"
             bgColor="skyblue"
             color="white"
-            _hover={{ bgColor: 'black' }}
+            _hover={{ bgColor: "black" }}
             onClick={addTodo}
           >
             ADD TASK
