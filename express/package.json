@@ -1,0 +1,19 @@
+{
+  "name": "chingu-backend",
+  "version": "1.0.0",
+  "description": "Backend for the todo app built for Chingu Pair Programming by Emmanuel and Braine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmmanuelOloke/chingu-peer-todo.git"
+  },
+  "author": "Emmanuel Oloke and Braine Lomoni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmmanuelOloke/chingu-peer-todo/issues"
+  },
+  "homepage": "https://github.com/EmmanuelOloke/chingu-peer-todo#readme"
+}
