@@ -1,0 +1,1 @@
+SELECT * FROM todo ORDER BY date DESC
